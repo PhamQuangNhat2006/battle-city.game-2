@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1745895857 source:c:\test\battle city.game 2\main.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<bits/stdc++.h>
+
