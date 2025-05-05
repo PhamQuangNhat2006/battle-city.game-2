@@ -228,7 +228,7 @@ Game(){
         cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
         running = false;
     }
-    window = SDL_CreateWindow("Tank Battle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Battle City", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (!window) {
         cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
         running = false;
