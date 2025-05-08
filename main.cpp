@@ -221,6 +221,7 @@ class Game{
         PlayerTank player;
         int enemyNumber = 6;
         vector<EnemyTank> enemies;
+        Mix_Chunk* bulletSound;
 
 Game(){
             running = true;
@@ -228,6 +229,19 @@ Game(){
         cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
         running = false;
     }
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+            cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << endl;
+            running = false;
+            return;
+        }
+
+        bulletSound = Mix_LoadWAV("sound/gunshot.wav");
+        if (!bulletSound) {
+            cerr << "Failed to load gunshot sound! SDL_mixer Error: " << Mix_GetError() << endl;
+            running = false;
+            return;
+        }
+
     window = SDL_CreateWindow("Battle City", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (!window) {
         cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
@@ -273,8 +287,11 @@ void handleEvents() {
             case SDLK_DOWN: player.move(0, 10, walls); break;
             case SDLK_LEFT: player.move(-10, 0, walls); break;
             case SDLK_RIGHT: player.move(10, 0, walls); break;
-            case SDLK_SPACE: player.shoot(); break;
-            }
+            case SDLK_SPACE:
+                        player.shoot();
+                        Mix_PlayChannel(-1, bulletSound, 0); // Phát tiếng súng
+                        break;
+                }
         }
     }
 }
@@ -372,6 +389,8 @@ void run(){
 }
 
 ~Game(){
+   Mix_FreeChunk(bulletSound);
+   Mix_CloseAudio();
    SDL_DestroyRenderer(renderer);
    SDL_DestroyWindow(window);
    SDL_Quit();
