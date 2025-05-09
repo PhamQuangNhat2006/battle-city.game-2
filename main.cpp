@@ -247,8 +247,8 @@ public:
     running = false;
     return;
 }
-
-Mix_PlayMusic(backgroundMusic, -1);  // Phát lặp vô hạn
+//ham phat soundtrack
+Mix_PlayMusic(backgroundMusic, -1);
 
         window = SDL_CreateWindow("Battle City", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
             SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -312,7 +312,7 @@ Mix_PlayMusic(backgroundMusic, -1);  // Phát lặp vô hạn
                         break;
                     case SDLK_SPACE:
                         player.shoot();
-                        Mix_PlayChannel(-1, bulletSound, 0); // Phát tiếng súng
+                        Mix_PlayChannel(-1, bulletSound, 0); // Phat tieng sung
                         break;
                 }
             }
